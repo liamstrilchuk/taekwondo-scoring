@@ -76,7 +76,7 @@ class Interface {
 				body {
 					background: white;
 				}
-				
+
 				.judgeScoring {
 					width: 65px;
 					height: 65px;
@@ -271,8 +271,8 @@ class Interface {
 		for (let i = 0; i < 10; i++) {
 			let judgeTextRed = "", judgeTextBlue = "";
 			for (let j = 0; j < this.app.config.judges; j++) {
-				const redColor = sw.red[i] && sw.red[i].judges[j] ? (sw.red[i].points === 2 ? "orange" : "red") : "#ccc";
-				const blueColor = sw.blue[i] && sw.blue[i].judges[j] ? (sw.blue[i].points === 2 ? "orange" : "blue") : "#ccc";
+				const redColor = sw.red[i] && sw.red[i].judges[j] ? (sw.red[i].points === 4 ? "orange" : "red") : "#ccc";
+				const blueColor = sw.blue[i] && sw.blue[i].judges[j] ? (sw.blue[i].points === 4 ? "orange" : "blue") : "#ccc";
 				judgeTextRed += `<div class="judgeScoring" style="background: ${redColor}"></div>`;
 				judgeTextBlue += `<div class="judgeScoring" style="background: ${blueColor}"></div>`;
 			}
