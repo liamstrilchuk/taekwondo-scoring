@@ -22,7 +22,12 @@ class Match {
 	updateClock() {
 		if (this.state === "rest" || this.state === "running") {
 			const delta = Date.now() - this.lastUpdate;
+			this.oldTime = this.timeRemaining;
 			this.timeRemaining -= delta / 1000;
+
+			if (this.timeRemaining < 10 && Math.floor(this.timeRemaining) !== Math.floor(this.oldTime) && this.state === "running") {
+				this.app.audioManager.sounds.timelow.play();
+			}
 	
 			this.app.interface.matchWindow.document.getElementById("matchTime").innerHTML = this.app.interface.formatTime(this.timeRemaining);
 		}
@@ -34,6 +39,7 @@ class Match {
 				this.state = "rest";
 				this.timeRemaining = this.settings.restTime;
 				this.currentRound++;
+				this.scoringWindows = { red: [], blue: [] };
 			} else {
 				this.state = "complete";
 			}
@@ -173,6 +179,7 @@ class Match {
 				if (!sw.hasScored) {
 					sw.hasScored = true;
 					side === "red" ? this.changeRedScore(sw.points) : this.changeBlueScore(sw.points);
+					this.app.audioManager.sounds.point.play();
 				}
 			}
 		}

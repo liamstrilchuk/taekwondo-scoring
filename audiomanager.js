@@ -1,7 +1,9 @@
 class AudioManager {
 	constructor() {
 		this.sounds = {
-			buzzer: this.loadAudio("audio/buzzer.mp3")
+			buzzer: this.loadAudio("audio/buzzer.mp3"),
+			point: this.loadAudio("audio/point.wav"),
+			timelow: this.loadAudio("audio/timelow.wav")
 		};
 	}
 

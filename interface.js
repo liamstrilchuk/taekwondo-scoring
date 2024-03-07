@@ -8,7 +8,8 @@ class Interface {
 
 	initialScreenView() {
 		this.view = "init";
-		let previousMatches = `You do not have any previous matches.`;
+		// let previousMatches = `You do not have any previous matches.`;
+		let previousMatches = "";
 		const matches = this.app.load("matches");
 		if (matches) {
 			previousMatches = ``;
@@ -72,6 +73,10 @@ class Interface {
 		this.view = "match";
 		this.matchWindow.document.head.innerHTML = `
 			<style>
+				body {
+					background: white;
+				}
+				
 				.judgeScoring {
 					width: 65px;
 					height: 65px;
@@ -428,5 +433,14 @@ class Interface {
 		const minutes = Math.floor(seconds / 60);
 		seconds = Math.floor(seconds % 60);
 		return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+	}
+
+	saveConfig() {
+		this.app.config.judges = Number(document.getElementById("judges").value);
+		this.app.config.pointGap = Number(document.getElementById("pointGap").value);
+		this.app.config.judgesToScore = Number(document.getElementById("judgesToScore").value);
+		this.app.config.scoringPersistance = Number(document.getElementById("scoringPersistance").value);
+		localStorage.setItem("config", JSON.stringify(this.app.config));
+		this.initialScreenView();
 	}
 }
